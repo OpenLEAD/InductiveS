@@ -1,0 +1,17 @@
+<package>
+  <description brief="Inductive Sensor GPIO through Ethernet">
+  Relay like mesurement of the Inductive Sensor using SR01E12 over Ethernet.
+  </description>
+  <author>elael/eduardo.elael@tenkel.com</author>
+  <license></license>
+  <url>http://</url>
+  <logo>http://</logo>
+  <!--
+   To add any dependencies use the depend tag
+  <depend package="dummy-dependency-0" />
+	...
+  <depend package="dummy-dependency-n-1" />
+  <depend package="dummy-dependency-n" />
+  -->
+  <depend package="EthernetDrivers" />
+</package>
