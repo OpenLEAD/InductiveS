@@ -5,6 +5,13 @@
 
 #include "inductive/TaskBase.hpp"
 
+namespace EthernetDrivers
+{
+class EthDriver;
+
+class GPIOin_Driver;
+}
+
 namespace inductive {
 
     /*! \class Task 
@@ -25,7 +32,8 @@ namespace inductive {
     {
 	friend class TaskBase;
     protected:
-
+	EthernetDrivers::GPIOin_Driver* InductiveS;
+	
 
 
     public:

@@ -1,21 +1,45 @@
 /* Generated from orogen/lib/orogen/templates/tasks/Task.cpp */
 
 #include "Task.hpp"
+#include "EthernetDrivers/EthernetDrivers.hpp"
 
 using namespace inductive;
 
 Task::Task(std::string const& name)
     : TaskBase(name)
+    , InductiveS(0)
 {
+  unsigned char t_mac[6];
+  t_mac[0]=0x00;
+  t_mac[1]=0x04;
+  t_mac[2]=0xA3;
+  t_mac[3]=0x31;
+  t_mac[4]=0x00;
+  t_mac[5]=0x14;
+  char bdip[]="192.168.1.255";
+
+	InductiveS = new EthernetDrivers::GPIOin_Driver(bdip,t_mac,5);
 }
 
 Task::Task(std::string const& name, RTT::ExecutionEngine* engine)
     : TaskBase(name, engine)
+    , InductiveS(0)
 {
+  unsigned char t_mac[6];
+  t_mac[0]=0x00;
+  t_mac[1]=0x04;
+  t_mac[2]=0xA3;
+  t_mac[3]=0x31;
+  t_mac[4]=0x00;
+  t_mac[5]=0x14;
+  char bdip[]="192.168.1.255";
+
+	InductiveS = new EthernetDrivers::GPIOin_Driver(bdip,t_mac,5);
 }
 
 Task::~Task()
 {
+	delete InductiveS;
 }
 
 
@@ -38,7 +62,11 @@ bool Task::startHook()
 }
 void Task::updateHook()
 {
+    bool msg;
+    InductiveS->read(&msg);
     TaskBase::updateHook();
+//_input.readNewest();
+    _output.write(msg);
 }
 void Task::errorHook()
 {
